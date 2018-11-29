@@ -55,30 +55,11 @@ transform_train = transforms.Compose([transforms.RandomCrop(32,padding=4),
 transform_test = transforms.Compose([transforms.ToTensor(),
 									 transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])])
 
-cifar_train = dset.CIFAR100("./", train=True, transform=transform_train, target_transform=None, download=True)
-cifar_test = dset.CIFAR100("./", train=False, transform=transform_test, target_transform=None, download=True)
+cifar_train = dset.CIFAR100("~/Datset/CIFAR100/", train=True, transform=transform_train, target_transform=None, download=True)
+cifar_test = dset.CIFAR100("~/Datset/CIFAR100/", train=False, transform=transform_test, target_transform=None, download=True)
 
-train_loader = torch.utils.data.DataLoader(cifar_train,batch_size=args.bs, shuffle=True,num_workers=2,drop_last=False)
-test_loader = torch.utils.data.DataLoader(cifar_test,batch_size=10000, shuffle=False,num_workers=2,drop_last=False)
-
-mask_conv0 = torch.cuda.FloatTensor(64,3,3,3)
-mask_conv3 = torch.cuda.FloatTensor(64,64,3,3)
-mask_conv7 = torch.cuda.FloatTensor(128,64,3,3)
-mask_conv10 = torch.cuda.FloatTensor(128,128,3,3)
-mask_conv14 = torch.cuda.FloatTensor(256,128,3,3)
-mask_conv17 = torch.cuda.FloatTensor(256,256,3,3)
-mask_conv20 = torch.cuda.FloatTensor(256,256,3,3)
-mask_conv24 = torch.cuda.FloatTensor(512,256,3,3)
-mask_conv27 = torch.cuda.FloatTensor(512,512,3,3)
-mask_conv30 = torch.cuda.FloatTensor(512,512,3,3)
-mask_conv34 = torch.cuda.FloatTensor(512,512,3,3)
-mask_conv37 = torch.cuda.FloatTensor(512,512,3,3)
-mask_conv40 = torch.cuda.FloatTensor(512,512,3,3)
-
-mask_fc1 = torch.cuda.FloatTensor(512,512)
-mask_fc4 = torch.cuda.FloatTensor(512,512)
-mask_fc6 = torch.cuda.FloatTensor(100,512)
-
+train_loader = torch.utils.data.DataLoader(cifar_train,batch_size=args.bs, shuffle=True,num_workers=8,drop_last=False)
+test_loader = torch.utils.data.DataLoader(cifar_test,batch_size=10000, shuffle=False,num_workers=8,drop_last=False)
 
 class CNN(nn.Module):
 	def __init__(self):
@@ -289,7 +270,7 @@ else:
 
 if use_cuda:
 	net.cuda()
-	net = torch.nn.DataParallel(net, device_ids=range(0,2))
+	net = torch.nn.DataParallel(net, device_ids=range(0,8))
 	cudnn.benchmark = True
 
 criterion = nn.CrossEntropyLoss()
@@ -318,7 +299,7 @@ def train(epoch):
 		train_loss += loss.data[0]
 		_, predicted = torch.max(outputs.data, 1)
 		total += targets.size(0)
-		correct += predicted.eq(targets.data).cpu().sum()
+		correct += predicted.eq(targets.data).cpu().sum().item()
 
 		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
 			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
@@ -339,7 +320,7 @@ def test():
 		test_loss += loss.data[0]
 		_, predicted = torch.max(outputs.data, 1)
 		total += targets.size(0)
-		correct += predicted.eq(targets.data).cpu().sum()
+		correct += predicted.eq(targets.data).cpu().sum().item()
 
 		progress_bar(batch_idx, len(test_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
 			% (test_loss/(batch_idx+1), 100.*correct/total, correct, total))
@@ -362,385 +343,6 @@ def test():
 		best_acc = acc
 	
 	return acc
-
-# Retraining
-def retrain(epoch,mask_conv0,mask_conv3,mask_conv7,mask_conv10,mask_conv14,mask_conv17,mask_conv20,mask_conv24,mask_conv27,mask_conv30,mask_conv34,mask_conv37,mask_conv40,mask_fc1,mask_fc4,mask_fc6):
-	print('\nEpoch: %d' % epoch)
-	global best_acc
-	net.train()
-	train_loss = 0
-	total = 0
-	correct = 0
-	try:
-		mask = torch.load('mask_{}.dat'.format(args.pr))
-		mask_conv0 = mask['mask_conv0']
-		mask_conv3 = mask['mask_conv3']
-		mask_conv7 = mask['mask_conv7']
-		mask_conv10 = mask['mask_conv10']
-		mask_conv14 = mask['mask_conv14']
-		mask_conv17 = mask['mask_conv17']
-		mask_conv20 = mask['mask_conv20']
-		mask_conv24 = mask['mask_conv24']
-		mask_conv27 = mask['mask_conv27']
-		mask_conv30 = mask['mask_conv30']
-		mask_conv34 = mask['mask_conv34']
-		mask_conv37 = mask['mask_conv37']
-		mask_conv40 = mask['mask_conv40']
-		mask_fc1 = mask['mask_fc1']
-		mask_fc4 = mask['mask_fc4']
-		mask_fc6 = mask['mask_fc6']
-	except:
-		pass
-	for batch_idx, (inputs, targets) in enumerate(train_loader):
-		if use_cuda:
-			inputs, targets = inputs.cuda(), targets.cuda()
-		optimizer.zero_grad()
-		inputs, targets = Variable(inputs), Variable(targets)
-		outputs = net(inputs)
-		loss = criterion(outputs, targets)
-
-		loss.backward()
-		
-		for child in net.children():
-			for param in child.conv1[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv0)
-				param.data = torch.mul(param.data,mask_conv0)
-		for child in net.children():
-			for param in child.conv2[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv3)
-				param.data = torch.mul(param.data,mask_conv3)
-		for child in net.children():
-			for param in child.conv3[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv7)
-				param.data = torch.mul(param.data,mask_conv7)
-		for child in net.children():
-			for param in child.conv4[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv10)
-				param.data = torch.mul(param.data,mask_conv10)
-		for child in net.children():
-			for param in child.conv5[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv14)
-				param.data = torch.mul(param.data,mask_conv14)
-		for child in net.children():
-			for param in child.conv6[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv17)
-				param.data = torch.mul(param.data,mask_conv17)
-		for child in net.children():
-			for param in child.conv7[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv20)
-				param.data = torch.mul(param.data,mask_conv20)
-		for child in net.children():
-			for param in child.conv8[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv24)
-				param.data = torch.mul(param.data,mask_conv24)
-		for child in net.children():
-			for param in child.conv9[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv27)
-				param.data = torch.mul(param.data,mask_conv27)
-		for child in net.children():
-			for param in child.conv10[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv30)
-				param.data = torch.mul(param.data,mask_conv30)
-		for child in net.children():
-			for param in child.conv11[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv34)
-				param.data = torch.mul(param.data,mask_conv34)
-		for child in net.children():
-			for param in child.conv12[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv37)
-				param.data = torch.mul(param.data,mask_conv37)
-		for child in net.children():
-			for param in child.conv13[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_conv40)
-				param.data = torch.mul(param.data,mask_conv40)
-
-		for child in net.children():
-			for param in child.fc1[1].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_fc1)
-				param.data = torch.mul(param.data,mask_fc1)
-		for child in net.children():
-			for param in child.fc2[1].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_fc4)
-				param.data = torch.mul(param.data,mask_fc4)
-		for child in net.children():
-			for param in child.fc3[0].parameters():
-				param.grad.data = torch.mul(param.grad.data, mask_fc6)
-				param.data = torch.mul(param.data,mask_fc6)
-
-		
-
-		optimizer.step()
-
-		train_loss += loss.data[0]
-		_, predicted = torch.max(outputs.data, 1)
-		total += targets.size(0)
-		correct += predicted.eq(targets.data).cpu().sum()
-
-		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
-		acc = 100.*correct/total
-
-prune = args.pr
-
-if prune:
-	if not(os.path.isfile('./mask_{}.dat'.format(args.pr))):
-		print("pruning CONV1 weights")
-		for child in net.children():
-			for param in child.conv1[0].parameters():
-				for i in range(0,64):
-					for j in range(0,3):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv0[i][j][k][l] = 0
-									else:
-										mask_conv0[i][j][k][l] = 1
-								else:
-									mask_conv0[i][j][k][l] = 1
-
-		print("pruning CONV2 weights")
-		for child in net.children():
-			for param in child.conv2[0].parameters():
-				for i in range(0,64):
-					for j in range(0,64):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv3[i][j][k][l] = 0
-									else:
-										mask_conv3[i][j][k][l] = 1
-								else:
-									mask_conv3[i][j][k][l] = 1
-
-		print("pruning CONV3 weights")
-		for child in net.children():
-			for param in child.conv3[0].parameters():
-				for i in range(0,128):
-					for j in range(0,64):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv7[i][j][k][l] = 0
-									else:
-										mask_conv7[i][j][k][l] = 1
-								else:
-									mask_conv7[i][j][k][l] = 1
-
-		print("pruning CONV4 weights")
-		for child in net.children():
-			for param in child.conv4[0].parameters():
-				for i in range(0,128):
-					for j in range(0,128):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv10[i][j][k][l] = 0
-									else:
-										mask_conv10[i][j][k][l] = 1
-								else:
-									mask_conv10[i][j][k][l] = 1
-
-		print("pruning CONV5 weights")
-		for child in net.children():
-			for param in child.conv5[0].parameters():
-				for i in range(0,256):
-					for j in range(0,128):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv14[i][j][k][l] = 0
-									else:
-										mask_conv14[i][j][k][l] = 1
-								else:
-									mask_conv14[i][j][k][l] = 1
-
-		print("pruning CONV6 weights")
-		for child in net.children():
-			for param in child.conv6[0].parameters():
-				for i in range(0,256):
-					for j in range(0,256):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv17[i][j][k][l] = 0
-									else:
-										mask_conv17[i][j][k][l] = 1
-								else:
-									mask_conv17[i][j][k][l] = 1
-
-		print("pruning CONV7 weights")
-		for child in net.children():
-			for param in child.conv7[0].parameters():
-				for i in range(0,256):
-					for j in range(0,256):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv20[i][j][k][l] = 0
-									else:
-										mask_conv20[i][j][k][l] = 1
-								else:
-									mask_conv20[i][j][k][l] = 1
-
-		print("pruning CONV8 weights")
-		for child in net.children():
-			for param in child.conv8[0].parameters():
-				for i in range(0,512):
-					for j in range(0,256):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv24[i][j][k][l] = 0
-									else:
-										mask_conv24[i][j][k][l] = 1
-								else:
-									mask_conv24[i][j][k][l] = 1
-
-		print("pruning CONV9 weights")
-		for child in net.children():
-			for param in child.conv9[0].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv27[i][j][k][l] = 0
-									else:
-										mask_conv27[i][j][k][l] = 1
-								else:
-									mask_conv27[i][j][k][l] = 1
-
-		print("pruning CONV10 weights")
-		for child in net.children():
-			for param in child.conv10[0].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv30[i][j][k][l] = 0
-									else:
-										mask_conv30[i][j][k][l] = 1
-								else:
-									mask_conv30[i][j][k][l] = 1
-
-		print("pruning CONV11 weights")
-		for child in net.children():
-			for param in child.conv11[0].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv34[i][j][k][l] = 0
-									else:
-										mask_conv34[i][j][k][l] = 1
-								else:
-									mask_conv34[i][j][k][l] = 1
-
-		print("pruning CONV12 weights")
-		for child in net.children():
-			for param in child.conv12[0].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv37[i][j][k][l] = 0
-									else:
-										mask_conv37[i][j][k][l] = 1
-								else:
-									mask_conv37[i][j][k][l] = 1
-
-		print("pruning CONV13 weights")
-		for child in net.children():
-			for param in child.conv13[0].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						for k in range(0,3):
-							for l in range(0,3):
-								if param.data[i][j][k][l] <= args.prindex:
-									if param.data[i][j][k][l] >= -args.prindex:
-										mask_conv40[i][j][k][l] = 0
-									else:
-										mask_conv40[i][j][k][l] = 1
-								else:
-									mask_conv40[i][j][k][l] = 1
-
-		print("pruning FC1 weights")
-		for child in net.children():
-			for param in child.fc1[1].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						if param.data[i][j] <= args.prindex:
-							if param.data[i][j] >= -args.prindex:
-								mask_fc1[i][j] = 0
-							else:
-								mask_fc1[i][j] = 1
-						else:
-							mask_fc1[i][j] = 1
-
-		print("pruning FC2 weights")
-		for child in net.children():
-			for param in child.fc2[1].parameters():
-				for i in range(0,512):
-					for j in range(0,512):
-						if param.data[i][j] <= args.prindex:
-							if param.data[i][j] >= -args.prindex:
-								mask_fc4[i][j] = 0
-							else:
-								mask_fc4[i][j] = 1
-						else:
-							mask_fc4[i][j] = 1
-
-		print("pruning FC3 weights")
-		for child in net.children():
-			for param in child.fc3[0].parameters():
-				for i in range(0,100):
-					for j in range(0,512):
-						if param.data[i][j] <= args.prindex:
-							if param.data[i][j] >= -args.prindex:
-								mask_fc6[i][j] = 0
-							else:
-								mask_fc6[i][j] = 1
-						else:
-							mask_fc6[i][j] = 1
-		
-		mask = {
-			'mask_conv0': mask_conv0,
-			'mask_conv3': mask_conv3,
-			'mask_conv7': mask_conv7,
-			'mask_conv10': mask_conv10,
-			'mask_conv14': mask_conv14,
-			'mask_conv17': mask_conv17,
-			'mask_conv20': mask_conv20,
-			'mask_conv24': mask_conv24,
-			'mask_conv27': mask_conv27,
-			'mask_conv30': mask_conv30,
-			'mask_conv34': mask_conv34,
-			'mask_conv37': mask_conv37,
-			'mask_conv40': mask_conv40,
-			'mask_fc1': mask_fc1,
-			'mask_fc4': mask_fc4,
-			'mask_fc6': mask_fc6
-		}
-	torch.save(mask, 'mask_{}.dat'.format(args.pr))
-
-	for epoch in range(0, 30):
-		retrain(epoch,mask_conv0,mask_conv3,mask_conv7,mask_conv10,mask_conv14,mask_conv17,mask_conv20,mask_conv24,mask_conv27,mask_conv30,mask_conv34,mask_conv37,mask_conv40,mask_fc1,mask_fc4,mask_fc6)
-		test()
 
 # Truncate weight param
 pprec = args.pprec
@@ -806,6 +408,4 @@ elif mode == 0: # only inference
 	test()
 else:
 	pass
-
-number_wv = 1
 

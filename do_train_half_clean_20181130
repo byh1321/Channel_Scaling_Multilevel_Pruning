@@ -1,0 +1,4 @@
+python main_half_clean_20181130.py --mode 1 --lr 0.8 --ne 40 --bs 1024 -r
+python main_half_clean_20181130.py --mode 1 --lr 0.08 --ne 40 --bs 1024 -r
+python main_half_clean_20181130.py --mode 1 --lr 0.008 --ne 40 --bs 1024 -r
+python main_half_clean_20181130.py --mode 0 
