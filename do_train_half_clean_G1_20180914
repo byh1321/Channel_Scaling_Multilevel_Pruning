@@ -1,0 +1,18 @@
+########################################
+# train 0.125 from pruned, qunted half
+python3 -W ignore network_gen.py --block1 ckpt_20180914_half_clean.t0 --o ckpt_20180914_half_clean_G1.t0 --mode 1
+python3 -W ignore main_half_clean_G1_20180914.py --lr 0.8 --bs 1024 --mode 1 --ne 50 -r --outputfile ckpt_20180914_half_clean_G1.t0 --network ckpt_20180914_half_clean_G1.t0
+python3 -W ignore main_half_clean_G1_20180914.py --lr 0.08 --bs 1024 --mode 1 --ne 50 -r --outputfile ckpt_20180914_half_clean_G1.t0 --network ckpt_20180914_half_clean_G1.t0
+python3 -W ignore main_half_clean_G1_20180914.py --lr 0.008 --bs 1024 --mode 1 --ne 50 -r --outputfile ckpt_20180914_half_clean_G1.t0 --network ckpt_20180914_half_clean_G1.t0
+python3 -W ignore main_half_clean_G1_20180914.py --lr 0.001 --bs 128 --mode 1 --ne 10 -r --outputfile ckpt_20180914_half_clean_G1.t0 --network ckpt_20180914_half_clean_G1.t0
+python3 -W ignore main_half_clean_G1_20180914.py --mode 0 --network ckpt_20180914_half_clean_G1.t0
+########################################
+
+########################################
+# retrain quant, prune
+#python3 -W ignore network_gen.py --block1 ckpt_20180914_half_clean_G1.t0 --o thres_008.t0 --mode 4
+#python3 -W ignore 20180914_main_half_clean.py --mode 3 --pr 80 --network thres_008.t0
+#cp ./checkpoint/ckpt_20180914_half_clean_G1.t0 ./checkpoint/ckpt_20180914_half_clean_G1_prune_80_pprec_15.t0
+#python3 -W ignore 20180914_main_half_clean.py --lr 0.008 --bs 1024 --mode 2 --pprec 15 --pr 80 --o ckpt_20180914_half_clean_G1_prune_80_pprec_15.t0 --thres 0.03
+#python -W ignore 20180914_main_half_clean.py --mode 0 --network ckpt_20180914_half_clean_G1_prune_80_pprec_15.t0 --pprec 15 --fixed 1 --aprec 10 --iwidth 5 -r
+########################################
