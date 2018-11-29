@@ -48,13 +48,18 @@ parser.add_argument('--aprec', type=int, default=20, metavar='N',help='Arithmeti
 parser.add_argument('--iwidth', type=int, default=10, metavar='N',help='integer bitwidth for internal part')
 parser.add_argument('--fixed', type=int, default=0, metavar='N',help='fixed=0 - floating point arithmetic')
 parser.add_argument('--network', default='ckpt_20181130_half_clean.t0', help='input network ckpt name', metavar="FILE")
-parser.add_argument('--outputfile', default='garbage.txt', help='output file name', metavar="FILE")
+parser.add_argument('--outputfile', default='ckpt_20181130_half_clean.t0', help='output file name', metavar="FILE")
 parser.add_argument('--imgprint', default=0, type=int, help='print input and dirty img to png') #mode=1 is train, mode=0 is inference
 parser.add_argument('--gau', type=float, default=0, metavar='N',help='gaussian noise standard deviation')
 parser.add_argument('--blur', type=float, default=0, metavar='N',help='blur noise standard deviation')
 
-
 args = parser.parse_args()
+
+global glob_gau
+global glob_blur
+
+glob_gau = args.gau
+glob_blur = args.blur
 
 use_cuda = torch.cuda.is_available()
 best_acc = 0  # best test accuracy
@@ -1088,7 +1093,8 @@ def test():
 			pass
 		else:
 			print('Saving..')
-			torch.save(state, './checkpoint/ckpt_20181130_half_clean.t0')
+			#torch.save(state, './checkpoint/ckpt_20181130_half_clean.t0')
+			torch.save(state, './checkpoint/'+args.outputfile)
 		best_acc = acc
 
 	return acc
