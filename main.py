@@ -55,8 +55,8 @@ transform_train = transforms.Compose([transforms.RandomCrop(32,padding=4),
 transform_test = transforms.Compose([transforms.ToTensor(),
 									 transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])])
 
-cifar_train = dset.CIFAR100("~/Datset/CIFAR100/", train=True, transform=transform_train, target_transform=None, download=True)
-cifar_test = dset.CIFAR100("~/Datset/CIFAR100/", train=False, transform=transform_test, target_transform=None, download=True)
+cifar_train = dset.CIFAR100("~/Dataset/CIFAR100/", train=True, transform=transform_train, target_transform=None, download=True)
+cifar_test = dset.CIFAR100("~/Dataset/CIFAR100/", train=False, transform=transform_test, target_transform=None, download=True)
 
 train_loader = torch.utils.data.DataLoader(cifar_train,batch_size=args.bs, shuffle=True,num_workers=8,drop_last=False)
 test_loader = torch.utils.data.DataLoader(cifar_test,batch_size=10000, shuffle=False,num_workers=8,drop_last=False)

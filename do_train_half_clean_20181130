@@ -1,22 +1,22 @@
 #################################################################################
 #																				#
 #																				#
-#									Pruning										#
-#																				#
-#																				#
-#################################################################################
-#python main_half_clean_20181130.py --mode 2 --lr 0.8 --ne 40 --bs 1024 -r --pr 80
-#python main_half_clean_20181130.py --mode 2 --lr 0.08 --ne 40 --bs 1024 -r --pr 80
-python main_half_clean_20181130.py --mode 2 --lr 0.008 --ne 40 --bs 1024 --pr 80 --outputfile ckpt_20181130_half_clean_pr_80.t0
-#python main_half_clean_20181130.py --mode 0 
-#################################################################################
-#																				#
-#																				#
 #									Train										#
 #																				#
 #																				#
 #################################################################################
-#python main_half_clean_20181130.py --mode 1 --lr 0.8 --ne 40 --bs 1024
-#python main_half_clean_20181130.py --mode 1 --lr 0.08 --ne 40 --bs 1024 -r
-#python main_half_clean_20181130.py --mode 1 --lr 0.008 --ne 40 --bs 1024 -r
+python main_half_clean_20181130.py --mode 1 --lr 0.8 --ne 80 --bs 1024
+python main_half_clean_20181130.py --mode 1 --lr 0.08 --ne 80 --bs 1024 -r
+python main_half_clean_20181130.py --mode 1 --lr 0.008 --ne 80 --bs 1024 -r
+python main_half_clean_20181130.py --mode 1 --lr 0.0008 --ne 80 --bs 1024 -r
+python main_half_clean_20181130.py --mode 0 
+#################################################################################
+#																				#
+#																				#
+#									Pruning										#
+#																				#
+#																				#
+#################################################################################
+#python main_half_clean_20181130.py --mode 2 --lr 0.008 --ne 40 --bs 1024 --pr 80 --outputfile ckpt_20181130_half_clean_pr_80.t0
+#python main_half_clean_20181130.py --mode 4
 #python main_half_clean_20181130.py --mode 0 

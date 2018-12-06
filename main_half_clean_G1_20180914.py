@@ -68,8 +68,8 @@ transform_train = transforms.Compose([transforms.RandomCrop(32,padding=4),
 transform_test = transforms.Compose([transforms.ToTensor(),
 									 transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])])
 
-cifar_train = dset.CIFAR100("~/Datset/CIFAR100/", train=True, transform=transform_train, target_transform=None, download=True)
-cifar_test = dset.CIFAR100("~/Datset/CIFAR100/", train=False, transform=transform_test, target_transform=None, download=True)
+cifar_train = dset.CIFAR100("~/Dataset/CIFAR100/", train=True, transform=transform_train, target_transform=None, download=True)
+cifar_test = dset.CIFAR100("~/Dataset/CIFAR100/", train=False, transform=transform_test, target_transform=None, download=True)
 
 '''
 cifar_test_gaussian_025 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.25_blur_0.0_test_targets.csv")

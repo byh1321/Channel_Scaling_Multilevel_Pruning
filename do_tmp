@@ -1,0 +1,5 @@
+python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.8 --bs 1024 --ne 80
+python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.08 --bs 1024 --ne 80 -r
+python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.008 --bs 1024 --ne 80 -r 
+python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.0008 --bs 1024 --ne 80 -r
+python main_20181001_half_VGG16_clean_v1.py --mode 0 -r
