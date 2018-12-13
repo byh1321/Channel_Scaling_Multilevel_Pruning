@@ -69,49 +69,6 @@ transform_test = transforms.Compose([transforms.ToTensor(),
 cifar_train = dset.CIFAR100("/home/yhbyun/Dataset/CIFAR100/", train=True, transform=transform_train, target_transform=None, download=True)
 cifar_test = dset.CIFAR100("/home/yhbyun/Dataset/CIFAR100/", train=False, transform=transform_test, target_transform=None, download=True)
 
-'''
-cifar_test_gaussian_025 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.25_blur_0.0_test_targets.csv")
-cifar_test_gaussian_016 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.16_blur_0.0_test_targets.csv")
-cifar_test_gaussian_015 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.15_blur_0.0_test_targets.csv")
-cifar_test_gaussian_010 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.1_blur_0.0_test_targets.csv")
-cifar_test_gaussian_008 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.08_blur_0.0_test_targets.csv")
-cifar_test_gaussian_005 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.05_blur_0.0_test_targets.csv")
-
-cifar_train_gaussian_025 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.25_blur_0.0_train_targets.csv")
-cifar_train_gaussian_016 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.16_blur_0.0_train_targets.csv")
-cifar_train_gaussian_015 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.15_blur_0.0_train_targets.csv")
-cifar_train_gaussian_010 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.1_blur_0.0_train_targets.csv")
-cifar_train_gaussian_008 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.08_blur_0.0_train_targets.csv")
-cifar_train_gaussian_005 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.05_blur_0.0_train_targets.csv")
-
-cifar_test_blur_10 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_1.0_test_targets.csv")
-cifar_test_blur_08 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/A2S/cifar100_VGG16/cifar100_gaussian_0.0_blur_0.8_test_targets.csv")
-cifar_test_blur_06 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.6_test_targets.csv")
-cifar_test_blur_05 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.5_test_targets.csv")
-cifar_test_blur_04 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.4_test_targets.csv")
-cifar_test_blur_03 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.3_test_targets.csv")
-cifar_test_blur_066 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.66_test_targets.csv")
-cifar_test_blur_033 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.33_test_targets.csv")
-
-cifar_train_blur_10 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_1.0_train_targets.csv")
-cifar_train_blur_08 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/A2S/cifar100_VGG16/cifar100_gaussian_0.0_blur_0.8_train_targets.csv")
-cifar_train_blur_06 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.6_train_targets.csv")
-cifar_train_blur_05 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.5_train_targets.csv")
-cifar_train_blur_04 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.4_train_targets.csv")
-cifar_train_blur_03 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.3_train_targets.csv")
-cifar_train_blur_066 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.66_train_targets.csv")
-cifar_train_blur_033 = cifar_dirty_train.CIFAR100DIRTY_TRAIN("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_0.33_train_targets.csv")
-
-cifar_train_gaussian_025 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.25_blur_0.0_train_targets.csv")
-cifar_train_blur_10 = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.0_blur_1.0_train_targets.csv")
-
-cifar_train_gaussian_008_blur_03_mixed = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.08_blur_0.3_train_targets.csv") 
-cifar_train_gaussian_016_blur_06_mixed = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.16_blur_0.6_train_targets.csv") 
-cifar_train_gaussian_008_blur_033_mixed = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.08_blur_0.33_train_targets.csv") 
-cifar_train_gaussian_016_blur_066_mixed = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.16_blur_0.66_train_targets.csv") 
-cifar_train_gaussian_016_blur_08_mixed = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/A2S/cifar100_VGG16/cifar100_gaussian_0.16_blur_0.8_train_targets.csv") 
-cifar_train_gaussian_025_blur_10_mixed = cifar_dirty_test.CIFAR100DIRTY_TEST("/home/yhbyun/180614_cifar_VGG16/cifar100_gaussian_0.25_blur_1.0_train_targets.csv") 
-'''
 #train_loader = torch.utils.data.DataLoader(torch.utils.data.ConcatDataset([cifar_train, cifar_train_blur_033]),batch_size=args.bs, shuffle=True,num_workers=8,drop_last=False)
 train_loader = torch.utils.data.DataLoader(cifar_train,batch_size=args.bs, shuffle=True,num_workers=8,drop_last=False)
 test_loader = torch.utils.data.DataLoader(cifar_test,batch_size=10000, shuffle=False,num_workers=8,drop_last=False)
@@ -387,7 +344,7 @@ def quant(input):
 	#input = torch.round(input / (2 ** (-args.aprec))) * (2 ** (-args.aprec))
 	return input
 
-def paramsget():
+def paramsget(net):
 	try:
 		params = net.conv1[0].weight.view(-1,)
 		params = torch.cat((params,net.conv2[0].weight.view(-1,)),0)
@@ -833,61 +790,79 @@ def set_mask(mask, block, val):
 		mask[15][:,0:255] = val 
 	return mask
 
-def save_network(layer):
-	for child in net2.children():
-		for param in child.conv1[0].parameters():
-			layer[0] = param.data
-	for child in net2.children():
-		for param in child.conv2[0].parameters():
-			layer[1] = param.data		
-	for child in net2.children():
-		for param in child.conv3[0].parameters():
-			layer[2] = param.data		
-	for child in net2.children():
-		for param in child.conv4[0].parameters():
-			layer[3] = param.data		
-	for child in net2.children():
-		for param in child.conv5[0].parameters():
-			layer[4] = param.data	
-	for child in net2.children():
-		for param in child.conv6[0].parameters():
-			layer[5] = param.data
-	for child in net2.children():
-		for param in child.conv7[0].parameters():
-			layer[6] = param.data
-	for child in net2.children():
-		for param in child.conv8[0].parameters():
-			layer[7] = param.data
-	for child in net2.children():
-		for param in child.conv9[0].parameters():
-			layer[8] = param.data
-	for child in net2.children():
-		for param in child.conv10[0].parameters():
-			layer[9] = param.data
-	for child in net2.children():
-		for param in child.conv11[0].parameters():
-			layer[10] = param.data
-	for child in net2.children():
-		for param in child.conv12[0].parameters():
-			layer[11] = param.data
-	for child in net2.children():
-		for param in child.conv13[0].parameters():
-			layer[12] = param.data
+def save_network(net):
+	mask = torch.load('mask_null.dat')
+	try:
+		mask[0] = net.conv1[0].weight.data
+		mask[1] = net.conv2[0].weight.data
+		mask[2] = net.conv3[0].weight.data
+		mask[3] = net.conv4[0].weight.data
+		mask[4] = net.conv5[0].weight.data
+		mask[5] = net.conv6[0].weight.data
+		mask[6] = net.conv7[0].weight.data
+		mask[7] = net.conv8[0].weight.data
+		mask[8] = net.conv9[0].weight.data
+		mask[9] = net.conv10[0].weight.data 
+		mask[10] = net.conv11[0].weight.data
+		mask[11] = net.conv12[0].weight.data
+		mask[12] = net.conv13[0].weight.data
+		mask[13] = net.fc1[1].weight.data
+		mask[14] = net.fc2[1].weight.data
+		mask[15] = net.fc3[0].weight.data
+	except:
+		for child in net.children():
+			for param in child.conv1[0].parameters():
+				mask[0] = param.data
+		for child in net.children():
+			for param in child.conv2[0].parameters():
+				mask[1] = param.data		
+		for child in net.children():
+			for param in child.conv3[0].parameters():
+				mask[2] = param.data		
+		for child in net.children():
+			for param in child.conv4[0].parameters():
+				mask[3] = param.data		
+		for child in net.children():
+			for param in child.conv5[0].parameters():
+				mask[4] = param.data	
+		for child in net.children():
+			for param in child.conv6[0].parameters():
+				mask[5] = param.data
+		for child in net.children():
+			for param in child.conv7[0].parameters():
+				mask[6] = param.data
+		for child in net.children():
+			for param in child.conv8[0].parameters():
+				mask[7] = param.data
+		for child in net.children():
+			for param in child.conv9[0].parameters():
+				mask[8] = param.data
+		for child in net.children():
+			for param in child.conv10[0].parameters():
+				mask[9] = param.data
+		for child in net.children():
+			for param in child.conv11[0].parameters():
+				mask[10] = param.data
+		for child in net.children():
+			for param in child.conv12[0].parameters():
+				mask[11] = param.data
+		for child in net.children():
+			for param in child.conv13[0].parameters():
+				mask[12] = param.data
 
-	for child in net2.children():
-		for param in child.fc1[1].parameters():
-			layer[13] = param.data
-	for child in net2.children():
-		for param in child.fc2[1].parameters():
-			layer[14] = param.data
-	for child in net2.children():
-		for param in child.fc3[0].parameters():
-			layer[15] = param.data
-	return layer
+		for child in net.children():
+			for param in child.fc1[1].parameters():
+				mask[13] = param.data
+		for child in net.children():
+			for param in child.fc2[1].parameters():
+				mask[14] = param.data
+		for child in net.children():
+			for param in child.fc3[0].parameters():
+				mask[15] = param.data
+	return mask
 
 def add_network():
-	layer = torch.load('mask_null.dat')
-	layer = save_network(layer)
+	layer = save_network(net2)
 	for child in net.children():
 		for param in child.conv1[0].parameters():
 			param.data = torch.add(param.data,layer[0])
@@ -1076,44 +1051,57 @@ if args.mode == 2:
 		best_acc = checkpoint['acc']
 	else:
 		best_acc = 0
-	params = paramsget()
-	mask_group_prune = getGroupPruningMask(params)
-	torch.save(mask_group_prune, './mask/mask_half_clean_prune_'+str(args.pr)+'.dat')
+	params = paramsget(net)
+	thres = findThreshold(params)
+	mask_prune = getPruningMask(thres)	
 
 if args.mode == 3:
 	checkpoint = torch.load('./checkpoint/'+args.network)
+	ckpt = torch.load('./checkpoint/'+args.network2)
 	net = checkpoint['net']
+	net2 = ckpt['net']
 	if args.resume:
 		print('==> Resuming from checkpoint..')
 		best_acc = checkpoint['acc']
 	else:
 		best_acc = 0
-	params = paramsget()
-	thres = findThreshold(params)
-	mask_inner_prune = getPruningMask(thres)
+	mask_nonzero = getNonzeroPoints(net2)  
+	mask_zero = []
+	for i in range(16):
+		mask_zero.append((mask_nonzero[i] == 0).type(torch.FloatTensor))
 
 if args.mode == 4:
 	checkpoint = torch.load('./checkpoint/'+args.network)
 	ckpt = torch.load('./checkpoint/'+args.network2)
 	net = checkpoint['net']
-	net2 = checkpoint['net']
+	net2 = ckpt['net']
 	if args.resume:
 		print('==> Resuming from checkpoint..')
 		best_acc = checkpoint['acc']
 	else:
 		best_acc = 0
-	params = paramsget()
-
-	mask_group = torch.load('./mask/mask_half_clean_prune_'+str(args.ldpr)+'.dat') 
-	mask_group_reverse = []
-	for i in range(0,16):
-		mask_group_reverse.append((mask_group[i] == 0).type(torch.FloatTensor))
-
+	mask_net = save_network(net) 
+	mask_net2 = save_network(net2) 
+	'''
+	print(mask_net[5][0])
+	print(mask_net2[5][30])
+	exit()
+	'''
+	mask_nonzero = getNonzeroPoints(net2)
+	mask_zero = []
+	for i in range(16):
+		mask_zero.append((mask_nonzero[i] == 0).type(torch.FloatTensor))
+	mask_diff = []
+	for i in range(16):
+		mask_diff.append(mask_net[i] - mask_net2[i])
+	params = concatMask(mask_diff) 	
+	thres = findThreshold(params)
+	mask_prune = getPruningMask(thres)	
 
 if args.mode == 7:
 	checkpoint = torch.load('./checkpoint/'+args.network)
 	net = checkpoint['net']
-	params = paramsget()
+	params = paramsget(net)
 	tmp = torch.sum(params.data != 0)
 	print(tmp.item()/params.size()[0])
 	exit()
@@ -1121,7 +1109,7 @@ if args.mode == 7:
 if use_cuda:
 	net.cuda()
 	net = torch.nn.DataParallel(net, device_ids=range(torch.cuda.device_count()))
-	if args.mode > 3:
+	if args.mode > 2:
 		net2.cuda()
 		net2 = torch.nn.DataParallel(net2, device_ids=range(torch.cuda.device_count()))
 	cudnn.benchmark = True
@@ -1170,7 +1158,7 @@ def train(epoch):
 		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
 			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
 
-def retrain(epoch):
+def pruning(epoch):
 	global glob_gau
 	global glob_blur
 	glob_gau = 0
@@ -1181,7 +1169,6 @@ def retrain(epoch):
 	correct = 0
 	total = 0
 	mask_channel = torch.load('mask_null.dat')
-	#mask_channel = set_mask(set_mask(mask_channel, 3, 1), 4, 0)
 	mask_channel = set_mask(mask_channel, 4, 1)
 	for batch_idx, (inputs, targets) in enumerate(train_loader):
 		if use_cuda:
@@ -1193,8 +1180,79 @@ def retrain(epoch):
 		loss.backward()
 
 		net_mask_mul(mask_channel)
-		net_mask_mul(mask_group_reverse)
-		add_network()
+		net_mask_mul(mask_prune)
+
+		optimizer.step()
+
+		train_loss += loss.data.item()
+		_, predicted = torch.max(outputs.data, 1)
+		total += targets.size(0)
+		correct += predicted.eq(targets.data).cpu().sum().item()
+
+		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
+			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
+
+def retrain(epoch):
+	global glob_gau
+	global glob_blur
+	glob_gau = 0
+	glob_blur = 0
+	print('\nEpoch: %d' % epoch)
+	net.train()
+	train_loss = 0
+	correct = 0
+	total = 0
+	mask_channel = torch.load('mask_null.dat')
+	mask_channel = set_mask(mask_channel, 4, 1)
+	for batch_idx, (inputs, targets) in enumerate(train_loader):
+		if use_cuda:
+			inputs, targets = inputs.cuda(), targets.cuda()
+		optimizer.zero_grad()
+		inputs, targets = Variable(inputs), Variable(targets)
+		outputs = net(inputs)
+		loss = criterion(outputs, targets)
+		loss.backward()
+
+		net_mask_mul(mask_channel)
+		net_mask_mul(mask_zero)
+		add_network()	
+
+		optimizer.step()
+
+		train_loss += loss.data.item()
+		_, predicted = torch.max(outputs.data, 1)
+		total += targets.size(0)
+		correct += predicted.eq(targets.data).cpu().sum().item()
+
+		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
+			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
+
+def repruning(epoch):
+	global glob_gau
+	global glob_blur
+	glob_gau = 0
+	glob_blur = 0
+	print('\nEpoch: %d' % epoch)
+	net.train()
+	train_loss = 0
+	correct = 0
+	total = 0
+	mask_channel = torch.load('mask_null.dat')
+	mask_channel = set_mask(mask_channel, 4, 1)
+	for batch_idx, (inputs, targets) in enumerate(train_loader):
+		if use_cuda:
+			inputs, targets = inputs.cuda(), targets.cuda()
+		optimizer.zero_grad()
+		inputs, targets = Variable(inputs), Variable(targets)
+		outputs = net(inputs)
+		loss = criterion(outputs, targets)
+		loss.backward()
+
+		net_mask_mul(mask_channel)
+		net_mask_mul(mask_prune)
+		net_mask_mul(mask_zero)
+
+		add_network()	
 
 		optimizer.step()
 
@@ -1217,13 +1275,15 @@ def test():
 	net_mask_mul(mask_channel)
 	if args.mode == 2:
 		net_mask_mul(mask_channel)
-		net_mask_mul(mask_group_prune)
+		net_mask_mul(mask_prune)
 	if args.mode == 3:
 		net_mask_mul(mask_channel)
-		net_mask_mul(mask_inner_prune)
+		net_mask_mul(mask_zero)
+		add_network()
 	elif args.mode == 4:
-		net_mask_mul(mask_group_reverse)
+		net_mask_mul(mask_prune)
 		net_mask_mul(mask_channel)
+		net_mask_mul(mask_zero)
 		add_network()
 	for batch_idx, (inputs, targets) in enumerate(test_loader):
 		if use_cuda:
@@ -1262,78 +1322,6 @@ def test():
 	return acc
 	
 # Retraining
-def groupPruningOne(epoch, mask_group_prune):
-	print('\nEpoch: %d' % epoch)
-	global best_acc
-	net.train()
-	train_loss = 0
-	total = 0
-	correct = 0
-	mask_channel = torch.load('mask_null.dat')
-	mask_channel = set_mask(mask_channel, 4, 1)
-	for batch_idx, (inputs, targets) in enumerate(train_loader):
-		if use_cuda:
-			inputs, targets = inputs.cuda(), targets.cuda()
-		optimizer.zero_grad()
-		inputs, targets = Variable(inputs), Variable(targets)
-		outputs = net(inputs)
-		loss = criterion(outputs, targets)
-		loss.backward()
-
-		if args.fixed:
-			quantize()
-
-		net_mask_mul(mask_channel)
-		
-		pruneNetwork(mask_group_prune)
-
-		optimizer.step()
-
-		train_loss += loss.data.item()
-		_, predicted = torch.max(outputs.data, 1)
-		total += targets.size(0)
-		correct += predicted.eq(targets.data).cpu().sum().item()
-
-		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
-		acc = 100.*correct/total
-
-def innerGroupPruningOne(epoch):
-	print('\nEpoch: %d' % epoch)
-	global best_acc
-	net.train()
-	train_loss = 0
-	total = 0
-	correct = 0
-	mask_channel = torch.load('mask_null.dat')
-	mask_channel = set_mask(mask_channel, 4, 1)
-	for batch_idx, (inputs, targets) in enumerate(train_loader):
-		if use_cuda:
-			inputs, targets = inputs.cuda(), targets.cuda()
-		optimizer.zero_grad()
-		inputs, targets = Variable(inputs), Variable(targets)
-		outputs = net(inputs)
-		loss = criterion(outputs, targets)
-		loss.backward()
-
-		if args.fixed:
-			quantize()
-
-		net_mask_mul(mask_channel)
-		
-		pruneNetwork(mask_inner_prune)
-
-		optimizer.step()
-
-		train_loss += loss.data.item()
-		_, predicted = torch.max(outputs.data, 1)
-		total += targets.size(0)
-		correct += predicted.eq(targets.data).cpu().sum().item()
-
-		progress_bar(batch_idx, len(train_loader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-			% (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
-		acc = 100.*correct/total
-
 # Truncate weight param
 pprec = args.pprec
 def quantize():
@@ -1399,17 +1387,17 @@ elif mode == 1: # mode=1 is training & inference @ each epoch
 		test()
 elif mode == 2: # retrain for quantization and pruning
 	for epoch in range(0,num_epoch):
-		groupPruningOne(epoch, mask_group_prune) 
+		pruning(epoch) 
 
 		test()
 elif mode == 3: # retrain for quantization and pruning
 	for epoch in range(0,num_epoch):
-		innerGroupPruningOne(epoch) 
+		retrain(epoch) 
 
 		test()
 elif mode == 4: # retrain for quantization and pruning
 	for epoch in range(0,num_epoch):
-		retrain(epoch) 
+		repruning(epoch) 
 
 		test()
 else:

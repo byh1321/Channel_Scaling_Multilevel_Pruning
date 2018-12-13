@@ -1,0 +1,4 @@
+#python main_half_clean_20181130.py --mode 2 --pr 60 --outputfile ckpt_20181130_half_clean_prune_60.t0 --bs 1024 --lr 0.008 --ne 30
+python main_half_clean_20181130.py --mode 3 --pr 80 --outputfile ckpt_20181130_half_clean_prune_6080.t0 --bs 1024 --lr 0.008 --ne 30 --network ckpt_20181130_half_clean_prune_60.t0
+#python main_half_clean_20181130.py --mode 4 --network ckpt_20181130_half_clean_prune_80.t0 --network2 ckpt_20181130_half_clean_prune_80.t0 --outputfile ckpt_20181130_half_clean_prune8060.t0 --ldpr 80 --ne 30 --bs 1024 --lr 0.0008
+
