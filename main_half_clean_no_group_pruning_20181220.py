@@ -421,8 +421,8 @@ def findThreshold(params):
 		#result = torch.sum(tmp)/params.size()[0]*64/28
 		#result = torch.sum(tmp)/params.size()[0]*64/11
 		#result = torch.sum(tmp)/params.size()[0]*64/9
-		result = torch.sum(tmp)/params.size()[0]*4 #for half clean
-		#result = torch.sum(tmp)/params.size()[0] # for full size
+		#result = torch.sum(tmp)/params.size()[0]*4 #for half clean
+		result = torch.sum(tmp)/params.size()[0] # for full size
 		if ((100-args.pr)/100)>result:
 			print("threshold : {}".format(thres))
 			return thres

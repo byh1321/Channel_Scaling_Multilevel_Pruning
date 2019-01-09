@@ -5,11 +5,11 @@
 #																				#
 #																				#
 #################################################################################
-#python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.8 --ne 80 --bs 1024
-#python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.08 --ne 80 --bs 1024 -r
-#python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.008 --ne 80 --bs 1024 -r
-#python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.0008 --ne 80 --bs 1024 -r
-#python main_half_clean_no_group_pruning_20181214.py --mode 0 
+python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.4 --ne 80 --bs 512
+python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.04 --ne 80 --bs 512 -r
+python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.004 --ne 80 --bs 512 -r
+python main_half_clean_no_group_pruning_20181214.py --mode 1 --lr 0.0004 --ne 80 --bs 512 -r
+python main_half_clean_no_group_pruning_20181214.py --mode 0 
 #################################################################################
 #																				#
 #																				#
@@ -23,5 +23,5 @@
 #cp checkpoint/ckpt_20181214_half_clean_pr_8060.t0 checkpoint/backup_ckpt_20181214_half_clean_pr_8060.t0
 #cp checkpoint/backup_ckpt_20181214_half_clean_pr_8060.t0 checkpoint/ckpt_20181214_half_clean_pr_8060.t0
 #python -W ignore main_half_clean_no_group_pruning_20181214.py --mode 4 --lr 0.008 --ne 40 --bs 1024 --outputfile ckpt_20181214_half_clean_pr_8060.t0 --network ckpt_20181214_half_clean_pr_8060.t0 --network2 ckpt_20181214_half_clean_pr_80.t0 --pr 80
-python -W ignore main_half_clean_no_group_pruning_20181214.py --mode 7 --network ckpt_20181214_half_clean_pr_8060.t0
+#python -W ignore main_half_clean_no_group_pruning_20181214.py --mode 7 --network ckpt_20181214_half_clean_pr_8060.t0
 #python main_half_clean_no_group_pruning_20181214.py --mode 0 

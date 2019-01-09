@@ -1,5 +1,18 @@
-python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.8 --bs 1024 --ne 80
-python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.08 --bs 1024 --ne 80 -r
-python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.008 --bs 1024 --ne 80 -r 
-python main_20181001_half_VGG16_clean_v1.py --mode 1 --lr 0.0008 --bs 1024 --ne 80 -r
-python main_20181001_half_VGG16_clean_v1.py --mode 0 -r
+python main_half_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_half_clean_pr_95.t0
+python main_half_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_half_clean_pr_90.t0
+python main_half_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_half_clean_pr_85.t0
+python main_half_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_half_clean_pr_80.t0
+python main_half_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_half_clean_pr_75.t0
+python main_half_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_half_clean_pr_70.t0
+#python main_0625_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_0625_clean_pr_95.t0
+#python main_0625_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_0625_clean_pr_90.t0
+#python main_0625_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_0625_clean_pr_85.t0
+#python main_0625_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_0625_clean_pr_80.t0
+#python main_0625_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_0625_clean_pr_75.t0
+#python main_0625_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_0625_clean_pr_70.t0
+#python main_075_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_075_clean_pr_95.t0
+#python main_075_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_075_clean_pr_90.t0
+#python main_075_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_075_clean_pr_85.t0
+#python main_075_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_075_clean_pr_80.t0
+#python main_075_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_075_clean_pr_75.t0
+#python main_075_clean_no_group_pruning_20181220.py --mode 0 --network ckpt_20181220_075_clean_pr_70.t0

@@ -41,9 +41,9 @@ parser.add_argument('--pprec', type=int, default=20, metavar='N',help='parameter
 parser.add_argument('--aprec', type=int, default=20, metavar='N',help='Arithmetic precision for internal arithmetic')
 parser.add_argument('--iwidth', type=int, default=10, metavar='N',help='integer bitwidth for internal part')
 parser.add_argument('--fixed', type=int, default=0, metavar='N',help='fixed=0 - floating point arithmetic')
-parser.add_argument('--network', default='ckpt_20181220_half_clean.t0', help='input network ckpt name', metavar="FILE")
-parser.add_argument('--network2', default='ckpt_20181220_half_clean_prune_80.t0', help='input network ckpt name', metavar="FILE")
-parser.add_argument('--outputfile', default='ckpt_20181220_half_clean.t0', help='output file name', metavar="FILE")
+parser.add_argument('--network', default='ckpt_20181220_075_clean.t0', help='input network ckpt name', metavar="FILE")
+parser.add_argument('--network2', default='ckpt_20181220_075_clean_prune_80.t0', help='input network ckpt name', metavar="FILE")
+parser.add_argument('--outputfile', default='ckpt_20181220_075_clean.t0', help='output file name', metavar="FILE")
 parser.add_argument('--imgprint', default=0, type=int, help='print input and dirty img to png') #mode=1 is train, mode=0 is inference
 parser.add_argument('--gau', type=float, default=0, metavar='N',help='gaussian noise standard deviation')
 parser.add_argument('--blur', type=float, default=0, metavar='N',help='blur noise standard deviation')
@@ -421,8 +421,8 @@ def findThreshold(params):
 		#result = torch.sum(tmp)/params.size()[0]*64/28
 		#result = torch.sum(tmp)/params.size()[0]*64/11
 		#result = torch.sum(tmp)/params.size()[0]*64/9
-		result = torch.sum(tmp)/params.size()[0]*4 #for half clean
-		#result = torch.sum(tmp)/params.size()[0] # for full size
+		#result = torch.sum(tmp)/params.size()[0]*4 #for half clean
+		result = torch.sum(tmp)/params.size()[0] # for full size
 		if ((100-args.pr)/100)>result:
 			print("threshold : {}".format(thres))
 			return thres
@@ -1134,7 +1134,7 @@ def train(epoch):
 	total = 0
 	mask_channel = torch.load('mask_null.dat')
 	#mask_channel = set_mask(set_mask(mask_channel, 3, 1), 4, 0)
-	mask_channel = set_mask(mask_channel, 4, 1)
+	mask_channel = set_mask(mask_channel, 2, 1)
 	for batch_idx, (inputs, targets) in enumerate(train_loader):
 		if use_cuda:
 			inputs, targets = inputs.cuda(), targets.cuda()
@@ -1167,7 +1167,7 @@ def pruning(epoch):
 	correct = 0
 	total = 0
 	mask_channel = torch.load('mask_null.dat')
-	mask_channel = set_mask(mask_channel, 4, 1)
+	mask_channel = set_mask(mask_channel, 2, 1)
 	for batch_idx, (inputs, targets) in enumerate(train_loader):
 		if use_cuda:
 			inputs, targets = inputs.cuda(), targets.cuda()
@@ -1201,7 +1201,7 @@ def retrain(epoch):
 	correct = 0
 	total = 0
 	mask_channel = torch.load('mask_null.dat')
-	mask_channel = set_mask(mask_channel, 4, 1)
+	mask_channel = set_mask(mask_channel, 2, 1)
 	for batch_idx, (inputs, targets) in enumerate(train_loader):
 		if use_cuda:
 			inputs, targets = inputs.cuda(), targets.cuda()
@@ -1236,7 +1236,7 @@ def repruning(epoch):
 	correct = 0
 	total = 0
 	mask_channel = torch.load('mask_null.dat')
-	mask_channel = set_mask(mask_channel, 4, 1)
+	mask_channel = set_mask(mask_channel, 2, 1)
 	for batch_idx, (inputs, targets) in enumerate(train_loader):
 		if use_cuda:
 			inputs, targets = inputs.cuda(), targets.cuda()
@@ -1269,7 +1269,7 @@ def test():
 	correct = 0
 	total = 0
 	mask_channel = torch.load('mask_null.dat')
-	mask_channel = set_mask(mask_channel, 4, 1)
+	mask_channel = set_mask(mask_channel, 2, 1)
 	net_mask_mul(mask_channel)
 	if args.mode == 2:
 		net_mask_mul(mask_channel)
