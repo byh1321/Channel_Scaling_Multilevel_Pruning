@@ -1015,94 +1015,6 @@ def concatMask(mask):
 	params = torch.cat((params, mask[15].view(-1,)),0)
 	return params
 
-# Load checkpoint.
-if args.mode == 0:
-	checkpoint = torch.load('./checkpoint/'+args.network)
-	net = checkpoint['net']
-
-if args.mode == 1:
-	if args.resume:
-		print('==> Resuming from checkpoint..')
-		checkpoint = torch.load('./checkpoint/'+args.network)
-		net = checkpoint['net']
-		best_acc = checkpoint['acc']
-	else:
-		net = CNN()
-		best_acc = 0
-
-if args.mode == 2:
-	checkpoint = torch.load('./checkpoint/'+args.network)
-	net = checkpoint['net']
-	if args.resume:
-		print('==> Resuming from checkpoint..')
-		best_acc = checkpoint['acc']
-	else:
-		best_acc = 0
-	params = paramsget(net)
-	thres = findThreshold(params)
-	mask_prune = getPruningMask(thres)	
-
-if args.mode == 3:
-	checkpoint = torch.load('./checkpoint/'+args.network)
-	ckpt = torch.load('./checkpoint/'+args.network2)
-	net = checkpoint['net']
-	net2 = ckpt['net']
-	if args.resume:
-		print('==> Resuming from checkpoint..')
-		best_acc = checkpoint['acc']
-	else:
-		best_acc = 0
-	mask_nonzero = getNonzeroPoints(net2)  
-	mask_zero = []
-	for i in range(16):
-		mask_zero.append((mask_nonzero[i] == 0).type(torch.FloatTensor))
-
-if args.mode == 4:
-	checkpoint = torch.load('./checkpoint/'+args.network)
-	ckpt = torch.load('./checkpoint/'+args.network2)
-	net = checkpoint['net']
-	net2 = ckpt['net']
-	if args.resume:
-		print('==> Resuming from checkpoint..')
-		best_acc = checkpoint['acc']
-	else:
-		best_acc = 0
-	mask_net = save_network(net) 
-	mask_net2 = save_network(net2) 
-	mask_nonzero = getNonzeroPoints(net2)
-	mask_zero = []
-	for i in range(16):
-		mask_zero.append((mask_nonzero[i] == 0).type(torch.FloatTensor))
-	mask_diff = []
-	for i in range(16):
-		mask_diff.append(mask_net[i] - mask_net2[i])
-	params = concatMask(mask_diff) 	
-	thres = findThreshold(params)
-	mask_prune = getPruningMask(thres)	
-
-if args.mode == 7:
-	checkpoint = torch.load('./checkpoint/'+args.network)
-	net = checkpoint['net']
-	params = paramsget(net)
-	tmp = torch.sum(params.data != 0)
-	print(tmp.item()/params.size()[0])
-	exit()
-
-if use_cuda:
-	net.cuda()
-	net = torch.nn.DataParallel(net, device_ids=range(torch.cuda.device_count()))
-	if args.mode > 2:
-		net2.cuda()
-		net2 = torch.nn.DataParallel(net2, device_ids=range(torch.cuda.device_count()))
-	cudnn.benchmark = True
-
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
-#optimizer = optim.Adam(net.parameters(), lr=args.lr, weight_decay=5e-4)
-
-start_epoch = args.se
-num_epoch = args.ne
-
 # Training
 def train(epoch):
 	global glob_gau
@@ -1359,31 +1271,8 @@ def quantize():
 		for param in child.fc3[0].parameters():
 			param.data = torch.round(param.data / (2 ** -(pprec))) * (2 ** -(pprec))
 
-
-# Train+inference vs. Inference
-if mode == 0: # only inference
-	test()
-
-elif mode == 1: # mode=1 is training & inference @ each epoch
-	for epoch in range(start_epoch, start_epoch+num_epoch):
-		train(epoch)
-
-		test()
-elif mode == 2: # retrain for quantization and pruning
-	for epoch in range(0,num_epoch):
-		pruning(epoch) 
-
-		test()
-elif mode == 3: # retrain for quantization and pruning
-	for epoch in range(0,num_epoch):
-		retrain(epoch) 
-
-		test()
-elif mode == 4: # retrain for quantization and pruning
-	for epoch in range(0,num_epoch):
-		repruning(epoch) 
-
-		test()
-else:
-	pass
-
+def printparam(filename,idx0,idx1):
+	checkpoint = torch.load('checkpoint/'+filename)
+	net = checkpoint['net']
+	print(net.conv1[0].weight.data[idx0,idx1])
+	return

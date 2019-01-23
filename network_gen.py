@@ -766,7 +766,7 @@ if __name__ == '__main__':
 		for i in range(16):
 			mask_zero.append((mask_nonzero[i] == 0).type(torch.FloatTensor).cuda())
 		'''
-		mask_rand = torch.load('mask_rand_100.dat')
+		mask_rand = torch.load('mask_rand_50.dat')
 		add_mask(net1, mask_rand)
 		'''
 		print(mask_zero[0][0])
