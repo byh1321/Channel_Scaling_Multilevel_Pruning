@@ -1,0 +1,528 @@
+#################################################################################
+#																				#
+#																				#
+#									Train										#
+#																				#
+#																				#
+#################################################################################
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 1
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 1
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 1
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 1
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.875
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.75
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.75
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.75
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.625
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 50 --bs 512 --cs 0.5
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.5
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.5
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.5
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125.t0
+
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.4375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.4375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.4375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.4375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.375
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.3125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.3125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.3125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.3125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.25
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.25
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.25
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.25
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.1875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.1875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.1875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.1875
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.125
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.4 --ne 40 --bs 512 --cs 0.0625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.04 --ne 100 --bs 512 -r --cs 0.0625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.004 --ne 100 --bs 512 -r --cs 0.0625
+#python main_channel_scaling_20190125.py --mode 1 --lr 0.0004 --ne 100 --bs 512 -r --cs 0.0625
+
+
+#################################################################################
+#																				#
+#																				#
+#									Pruning										#
+#																				#
+#																				#
+#################################################################################
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 1
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 1
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.9375
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.9375
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.875
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.8125
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.8125
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.75
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.75
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.6875
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.6875
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.625
+#
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.5625
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.5625
+#
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --cs 0.5
+python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --cs 0.5
+
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 99 --outputfile ckpt_20190125_half_clean_pr_99.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 98 --outputfile ckpt_20190125_half_clean_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 97 --outputfile ckpt_20190125_half_clean_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 96 --outputfile ckpt_20190125_half_clean_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 95 --outputfile ckpt_20190125_half_clean_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 90 --outputfile ckpt_20190125_half_clean_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 85 --outputfile ckpt_20190125_half_clean_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 80 --outputfile ckpt_20190125_half_clean_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 75 --outputfile ckpt_20190125_half_clean_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 2 --lr 0.004 --ne 40 --bs 512 --pr 70 --outputfile ckpt_20190125_half_clean_pr_70.t0
+#################################################################################
+#																				#
+#																				#
+#									Testing										#
+#																				#
+#																				#
+#################################################################################
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.0625 --network ckpt_cs_625.0_20190125_pr_99.t0
+#echo "0625 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.125 --network ckpt_cs_1250.0_20190125_pr_99.t0
+#echo "125 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.1875 --network ckpt_cs_1875.0_20190125_pr_99.t0
+#echo "1875 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.25 --network ckpt_cs_2500.0_20190125_pr_99.t0
+#echo "2500 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.3125 --network ckpt_cs_3125.0_20190125_pr_99.t0
+#echo "3125 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.375 --network ckpt_cs_3750.0_20190125_pr_99.t0
+#echo "375 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.4375 --network ckpt_cs_4375.0_20190125_pr_99.t0
+#echo "4375 done"
+
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125_pr_99.t0
+#echo "5 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125_pr_99.t0
+#echo "5625 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125_pr_99.t0
+#echo "625 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125_pr_99.t0
+#echo "6875 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125_pr_99.t0
+#echo "7500 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125_pr_99.t0
+#echo "8125 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125_pr_99.t0
+#echo "875 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125_pr_99.t0
+#echo "9375 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125_pr_99.t0
+#echo "1 done"
+
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190125.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_70.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_75.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_80.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_85.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_90.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_95.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_96.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_97.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_98.t0
+python main_channel_scaling_20190125.py --mode 0 --cs 0.5 --network ckpt_cs_5000.0_20190214_pr_99.t0
+echo "5 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.5625 --network ckpt_cs_5625.0_20190214_pr_99.t0
+#echo "5625 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.625 --network ckpt_cs_6250.0_20190214_pr_99.t0
+#echo "625 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.6875 --network ckpt_cs_6875.0_20190214_pr_99.t0
+#echo "6875 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.75 --network ckpt_cs_7500.0_20190214_pr_99.t0
+#echo "7500 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.8125 --network ckpt_cs_8125.0_20190214_pr_99.t0
+#echo "8125 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.875 --network ckpt_cs_8750.0_20190214_pr_99.t0
+#echo "875 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 0.9375 --network ckpt_cs_9375.0_20190214_pr_99.t0
+#echo "9375 done"
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190125.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_70.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --cs 1 --network ckpt_cs_10000.0_20190214_pr_99.t0
+#echo "1 done"
+
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_99.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_98.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_97.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_96.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_90.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_85.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_80.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_75.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_70.t0
+
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 7 --network ckpt_20190125_half_clean_pr_95.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_9590.t0
+#python main_channel_scaling_20190125.py --mode 7 --network ckpt_20190125_half_clean_pr_9590.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_959085.t0
+#python main_channel_scaling_20190125.py --mode 7 --network ckpt_20190125_half_clean_pr_959085.t0
+#python main_channel_scaling_20190125.py --mode 0 --network ckpt_20190125_half_clean_pr_95908580.t0
+#python main_channel_scaling_20190125.py --mode 7 --network ckpt_20190125_half_clean_pr_95908580.t0
